@@ -12,10 +12,8 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
-	"golang.org/x/image/font/gofont/gobold"
-  "golang.org/x/image/math/fixed"
+	"golang.org/x/image/math/fixed"
 )
-
 
 // Create image size
 const fontsize = 30
@@ -58,7 +56,12 @@ func backgroud(img *image.RGBA) {
 }
 
 func createDraw(title string, fileName *string) {
-	ft, err := truetype.Parse(gobold.TTF)
+  fontBinary, err := os.ReadFile("ipaexg.ttf")
+  if err != nil {
+    fmt.Fprintln(os.Stderr, err)
+    os.Exit(1)
+  }
+	ft, err := truetype.Parse(fontBinary)
 	if err != nil {
 		fmt.Println("font", err)
 	}
@@ -66,7 +69,8 @@ func createDraw(title string, fileName *string) {
 
 	backgroud(img)
 
-	opt := truetype.Options{Size: fontsize}
+  opt := truetype.Options{Size: fontsize}
+	//opt := opentype.FaceOptions{Size: fontsize}
 	face := truetype.NewFace(ft, &opt)
 	d := &font.Drawer{
 		Dst:  img,
