@@ -7,7 +7,7 @@ You can create images for OGP from scraping information
 ## How to
 ```
   Usage:
-    ogpgen command [arguments]
+  ogpgen command [arguments]
         --url string      Target url
 	--filename string   output filename(ex: hoge.png...)
 ```
